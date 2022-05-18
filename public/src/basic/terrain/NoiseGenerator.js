@@ -11,9 +11,11 @@ class NoiseGenerator {
             scale: 1
         }
     }
+    
     wrapper(x, y) {
         return noise2(x, y) * 2.0 - 1.0
     }
+
     perlin2d(x, y, params = null) {
         if (!params) params = this.params
         const xs = x / params.scale;

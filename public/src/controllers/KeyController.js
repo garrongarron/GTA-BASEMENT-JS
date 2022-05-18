@@ -1,7 +1,9 @@
 import keyCode from "../basic/KeyCode.js"
 import keyListener, { KeyListener } from "../basic/KeyListener.js"
+import spawner from "../scenes/files-scene4/Spawner.js"
 import broadcaster from "../services/Broadcaster.js"
 import nick from "../services/nick.js"
+import fallingController from "./FallingController.js"
 import { mode } from "./ModeController.js"
 
 class KeyController {
@@ -31,10 +33,15 @@ class KeyController {
         this.state.rotation.y = 0
         this.state.angle.y = 0
 
-        if (this.keyListener.isPressed(keyCode.SHIFT)) this.state.mode = mode.SHOOTER
+        if (this.keyListener.isPressed(keyCode.SHIFT) && this.state.mode != mode.FALLING) this.state.mode = mode.SHOOTER
+
+        //falling
+        if (this.keyListener.isPressed(keyCode.KEY_P)) this.state.mode = mode.FALLING
         
-        if (this.state.mode == mode.DEATH) return
-        if (this.state.mode == mode.HITTED) return
+        
+
+        // if (this.state.mode == mode.DEATH) return
+        // if (this.state.mode == mode.HITTED) return
         
         this.state.translation.x = 0
         this.state.translation.y = 0

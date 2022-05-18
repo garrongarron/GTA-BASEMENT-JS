@@ -5,6 +5,7 @@ const mode = {
     "SHOOTER":3,
     "DEATH":4,
     "HITTED":5,
+    "FALLING":6,
 }
 
 class ModeController {

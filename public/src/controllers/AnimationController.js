@@ -31,6 +31,10 @@ class AnimationController {
             this.transitionHandler.action(11, 1, false)
             return
         }
+        if (this.state.mode == mode.FALLING) {
+            this.transitionHandler.action(12, 1, false)
+            return
+        }
         if (this.state.mode == mode.IDLE) {
             if (this.state.translation.y == 1) {// console.log('2 adelante');
                 this.transitionHandler.action(5)

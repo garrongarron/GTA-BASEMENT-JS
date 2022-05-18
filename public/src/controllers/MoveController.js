@@ -1,4 +1,5 @@
 import { getDelta } from "../basic/Clock.js"
+import { mode } from "./ModeController.js"
 
 class MoveController {
     constructor() {
@@ -13,7 +14,10 @@ class MoveController {
     tick() {
         const position = this.character.position
         const rotation = this.character.rotation
-        const speed = this.speed * getDelta()
+        let speed = this.speed * getDelta()
+        if (this.state.mode == mode.FALLING)  {
+            speed = 30 * getDelta()
+        }
         if (this.state.translation.y == 1) {
             position.x += Math.sin(rotation.y) * speed
             position.z += Math.cos(rotation.y) * speed

@@ -9,6 +9,7 @@ import { CameraController } from "../../controllers/CameraController.js"
 import { CharacterController } from "../../controllers/CharacterController.js"
 import { CRotationController } from "../../controllers/CRotationController.js"
 import { DeathController } from "../../controllers/DeathController.js"
+import { FallingController } from "../../controllers/FallingController.js"
 import { GravityController } from "../../controllers/GravityController.js"
 import { HittableController } from "../../controllers/HittableController.js"
 import { HittedController } from "../../controllers/HittedController.js"
@@ -59,6 +60,7 @@ class CustomController {
         this.deathController = new DeathController(this.peerId)
         this.hittedController = new HittedController(this.peerId)
         this.hPController = new HPController(this.peerId)
+        this.fallingController = new FallingController(this.peerId)
         this.group = new THREE.Group();
         this.shadowVector = new THREE.Vector3(0, 5, -15)
         this.chest = null
@@ -133,8 +135,7 @@ class CustomController {
         this.characterController.addController(this.deathController)
         this.characterController.addController(this.hittedController)
         this.characterController.addController(this.hPController)
-        
-        
+        this.characterController.addController(this.fallingController)
         this.characterController.start()
 
     }

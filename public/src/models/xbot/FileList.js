@@ -11,5 +11,6 @@ const fileList = {
     "9":"Right Strafe.fbx",
     "10":"Left Strafe.fbx",
     "11":"Death.fbx",
+    "12":"Falling.fbx",
 }
 export default fileList
