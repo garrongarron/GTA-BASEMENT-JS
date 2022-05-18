@@ -4,7 +4,7 @@ class MoveController {
     constructor() {
         this.state = null
         this.character = null
-        this.speed = 2.5
+        this.speed = 7//2.5
     }
     init(characterController) {
         this.state = characterController.state

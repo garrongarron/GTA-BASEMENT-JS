@@ -5,6 +5,7 @@ let sceneList = {
     get 'menu'(){ return lazyLoad(location.origin+'/src/scenes/Scene2.js')},
     get 'settings'(){ return lazyLoad(location.origin+'/src/scenes/Scene3.js')},
     get 'game'(){ return lazyLoad(location.origin+'/src/scenes/Scene4.js')},
+    get 'terrain'(){ return lazyLoad(location.origin+'/src/scenes/Scene5.js')},
 }
 export default sceneList
 

@@ -2,12 +2,14 @@ import camera from "../../basic/Camera.js"
 import light from "../../basic/Light.js"
 import ray from "../../basic/shapes/Ray.js"
 import sphere from "../../basic/shapes/Sphere.js"
+import terrain from "../../basic/terrain/Terrain.js"
 import { AnimationController } from "../../controllers/AnimationController.js"
 // import { BroadcasterController } from "../../controllers/BroadcasterController.js"
 import { CameraController } from "../../controllers/CameraController.js"
 import { CharacterController } from "../../controllers/CharacterController.js"
 import { CRotationController } from "../../controllers/CRotationController.js"
 import { DeathController } from "../../controllers/DeathController.js"
+import { GravityController } from "../../controllers/GravityController.js"
 import { HittableController } from "../../controllers/HittableController.js"
 import { HittedController } from "../../controllers/HittedController.js"
 import { HPController } from "../../controllers/HPController.js"
@@ -20,6 +22,7 @@ import { RayCasterController } from "../../controllers/RaycasterController.js"
 import { RemoteController } from "../../controllers/RemoteController.js"
 import { RotationController } from "../../controllers/RotationController.js"
 import { ShadowController } from "../../controllers/ShadowController.js"
+import { TerrainController } from "../../controllers/TerrrainController.js"
 import { WeaponController } from "../../controllers/WeaponController.js"
 import nick from "../../services/nick.js"
 import hitSystem from "./HitSystem.js"
@@ -43,6 +46,8 @@ class CustomController {
         this.keyController = new KeyController(this.peerId)
         this.mouseRotationController = new MouseRotationController(this.peerId)
         this.moveController = new MoveController()
+        this.gravityController = new GravityController(this.peerId)
+        if (this.peerId == nick) this.terrainController = new TerrainController(this.peerId)
         this.rotationController = new CRotationController(this.peerId)
         if (this.peerId == nick) this.shadowController = new ShadowController()
         if (this.peerId == nick) this.cameraController = new CameraController()
@@ -68,6 +73,13 @@ class CustomController {
         this.characterController.addController(this.mouseController)
         this.characterController.addController(this.mouseRotationController)
         this.characterController.addController(this.moveController)
+        if (this.peerId == nick) {
+            this.terrainController.setTerrain(terrain)
+            this.terrainController.setTarget(character)
+            this.characterController.addController(this.terrainController)
+        }
+        this.gravityController.setArray(terrain.group.children)
+        this.characterController.addController(this.gravityController)
         this.characterController.addController(this.rotationController)
         if (this.peerId == nick) this.shadowController.setDirectionalLight(light.children[0])
         if (this.peerId == nick) this.shadowController.setVector(this.shadowVector)

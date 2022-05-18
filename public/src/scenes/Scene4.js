@@ -9,7 +9,7 @@ import skyTexture from "../images/SkyTexture.js";
 import nextBtn from "../UI/NextScene.js"
 import cache from "../basic/Cache.js";
 // import hpSystem from "./files-scene4/HPSystem.js";
-import cube from "../basic/shapes/Cube.js";
+// import cube from "../basic/shapes/Cube.js";
 import spawner from "./files-scene4/Spawner.js";
 import Stats from "../basic/Stats.js";
 import loadTrees from "../models/Trees/TreeSpawner.js";
@@ -17,6 +17,8 @@ import gunBar from "../UI/GunBar.js";
 import sky from "../basic/shapes/Sky.js";
 import { xbotContainer } from "../models/xbot/XbotTest.js";
 import nick from "../services/nick.js";
+import terrain from "../basic/terrain/Terrain.js";
+
 
 
 let stats = new Stats();
@@ -26,16 +28,19 @@ class Scene4 {
         this.sceneHandler = sceneHandler
 
         document.body.appendChild(stats.dom);
-        scene.add(plane);
+        // scene.add(plane);
+        terrain.start(scene).then(()=>{
+            loadTrees(scene);
+        })
         scene.add(light);
-        cube.position.z = 5
-        scene.add(cube);
+        // cube.position.z = 5
+        // scene.add(cube);
         scene.add(sky);
 
         scene.background = skyTexture;
         loopMachine.addCallback(this.render);
         loopMachine.start()
-        loadTrees(scene)
+        
         const players = JSON.parse(localStorage.getItem('players') || '[]')
         players.forEach(peerId => {
             let player = spawner.createPlayer(peerId)

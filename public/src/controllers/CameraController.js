@@ -3,7 +3,7 @@ import mouse from "../basic/Mouse.js"
 class CameraController {
     constructor() {
         this.character = null
-        this.radio = 5 //1.75
+        this.radio = 1.75
         this.height = 1.5
         this.heightTarget = 1.2
         this.angle = 5 * Math.PI / 180
@@ -11,6 +11,7 @@ class CameraController {
         this.ahead = 20
         this.camera = null
         this.state = null
+        this.y = 0
     }
     init(characterController) {
         this.character = characterController.character
@@ -23,20 +24,21 @@ class CameraController {
 
         if (this.state.angle.y == 1) this.angle -= this.angleSensibility
         if (this.state.angle.y == -1) this.angle += this.angleSensibility
+        this.y = THREE.MathUtils.lerp(this.y, mouse.acumulated.y, 0.3)
 
         const rotation = this.character.rotation
         const position = this.character.position.clone()
         this.camera.position.set(
             position.x - Math.sin(rotation.y + this.angle) * this.radio,
-            position.y + this.height + .25 + mouse.acumulated.y / 100,
+            position.y + this.height + .25 + this.y / 100,
             position.z - Math.cos(rotation.y + this.angle) * this.radio,
         )
-        this.camera.position.y = THREE.MathUtils.clamp(this.camera.position.y, .5, 5)
+        this.camera.position.y = THREE.MathUtils.clamp(this.camera.position.y, position.y+.5, position.y+5)
         
         const gap = rotation.y - 60 * 180/Math.PI
         this.camera.lookAt(
             position.x + Math.sin(gap) * .5 /* this.ahead */,
-            position.y + 1.5 - 0 * mouse.acumulated.y / 50,
+            position.y + 1.5 - 0 * this.y / 50,
             position.z + Math.cos(gap) * .5 /* this.ahead **/  
         )
         // console.log( Math.sin(rotation.y) * this.radio)

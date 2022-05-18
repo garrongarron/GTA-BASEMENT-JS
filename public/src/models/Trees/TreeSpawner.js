@@ -1,3 +1,4 @@
+import terrainSystem from "../../basic/terrain/TerrainSystem.js";
 import fileList from "./FileList.js";
 
 let treesPrefavGroup = new THREE.Group()
@@ -31,6 +32,10 @@ let loadTrees = (scene) => {
                     y: -1,
                     z: Math.random() * radio - radio / 2
                 }
+                data[`tree-${index}-${type}`].y = terrainSystem.customNoiseGenerator(
+                    data[`tree-${index}-${type}`].x, 
+                   - data[`tree-${index}-${type}`].z
+                )
             }
             localStorage.setItem('trees', JSON.stringify(data))
         }
