@@ -1,0 +1,21 @@
+{
+  "name": "peerjs-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "productionServer.js",
+  "engines": {
+    "node": "14.x"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/productionServer.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.17.2",
+    "peer": "^0.6.1"
+  }
+}

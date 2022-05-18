@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --main-bg-color: #009999;
+            --main-bg-color-darck: #004545;
+            --color-darck: #112222;
+            --color-light: #99ffff;
+            --highlights: #fff;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 2.5vh;
+            color: var(--highlights);
+            background: linear-gradient(-90deg, var(--main-bg-color-darck), var(--color-darck));
+        }
+
+        .lb-main {
+            width: 90%;
+            height: 90%;
+            transform: translateX(5%) translateY(5%);
+            position: absolute;
+            background: radial-gradient(circle, var(--main-bg-color-darck), var(--color-darck));
+            border: 2px solid var(--main-bg-color);
+            box-shadow: 0px 0px 15px var(--main-bg-color);
+            ;
+            border-radius: 5px;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-flow: row;
+            justify-content: space-around;
+        }
+
+        .lb-main>div {
+            position: relative;
+            background: radial-gradient(circle, var(--main-bg-color-darck), var(--color-darck));
+            border: 2px solid var(--main-bg-color-darck);
+            box-shadow: 0px 0px .25em var(--main-bg-color);
+            border-radius: .25em;
+            width: 40%;
+            height: 90%;
+            padding: 1em;
+        }
+
+        .lb-main label {
+            width: 100%;
+            display: block;
+            padding-bottom: 1em;
+        }
+
+        .lb-main label,
+        .lb-main input,
+        .lb-main button {
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            background-color: inherit;
+            color: inherit;
+            border: none;
+            border-radius: 3px;
+        }
+
+        .lb-main input {
+            border-bottom: 1px solid var(--main-bg-color-darck);
+            border: 1px solid var(--main-bg-color-darck);
+            background-color: var(--color-darck);
+            outline: none;
+            color: var(--color-light);
+            font-weight: lighter;
+            text-align: center;
+        }
+
+        .lb-main input::placeholder {
+            color: var(--main-bg-color-darck);
+        }
+
+        .lb-main button {
+            background-color: var(--color-light);
+            border: var(--color-light);
+            color: var(--color-darck);
+
+        }
+
+        .lb-rooms {
+            display: flex;
+            flex-flow: row;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .lb-rooms {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-top: 1em;
+            position: relative;
+        }
+
+        .lb-rooms ul {
+            width: 47.5%;
+            height: 45vh;
+            border: .1em solid var(--main-bg-color-darck);
+            text-align: center;
+            padding: 1em;
+            list-style: none;
+        }
+
+        .lb-rooms ul>li {
+            background-color: var(--main-bg-color-darck);
+            padding: .25em;
+            margin-bottom: .25em;
+            cursor: pointer;
+        }
+
+        .lb-rooms ul>li:hover {
+            background-color: var(--main-bg-color);
+        }
+
+        .lb-users {
+            display: flex;
+            flex-flow: column;
+        }
+
+        .lb-users>li:last-child {
+            color: #111;
+            background-color: var(--color-light);
+            bottom: 0;
+            padding: .25em;
+            margin-top: auto;
+            font-weight: bold;
+        }
+
+        /**/
+        .lb-secret-room {
+            text-align: center;
+        }
+
+        .lb-secret-room h1 {
+            display: block;
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        .lb-secret-name {
+            display: block;
+            text-align: center;
+            font-size: 1em;
+            font-style: italic;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="lb-main">
+        <div class="lb-room" style="display: none1">
+            <label for="">Write your name</label>
+            <input type="text" placeholder="Your name">
+            <button>Save</button>
+            <div class="lb-rooms">
+                <ul class="lb-room-names">
+                    <li>Room#1</li>
+                    <li>Room#2</li>
+                </ul>
+                <ul class="lb-users">
+                    <li>User#1</li>
+                    <li>User#2</li>
+                    <li>User#3</li>
+                    <li>User#4</li>
+                    <li>Start</li>
+                </ul>
+            </div>
+            <label for="">Create a room</label>
+            <input type="text" placeholder="Room Name">
+            <button>Create</button>
+        </div>
+        <div class="lb-secret-room" style="display: none1">
+            <h1>My Name</h1>
+            <div class="lb-secret-name">#partida-secreta</div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <label for="">Create a Secret Room</label>
+            <input type="text" placeholder="Secret Room Name">
+            <button>Create</button>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <label for="">Joint to a Secret Room</label>
+            <input type="text" placeholder="Secret Room Name">
+            <button>Join</button>
+        </div>
+    </div>
+    <script>
+        window.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+        })
+        document.body.querySelectorAll('input').forEach(element => {
+            element.setAttribute('spellcheck', 'false');
+        });
+    </script>
+</body>
+
+</html>

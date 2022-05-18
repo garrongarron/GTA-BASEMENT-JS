@@ -1,0 +1,43 @@
+.room-list {
+    width: 600px;
+    height: fit-content;
+    position: fixed;
+    top: 20px;
+    right: 50%;
+    transform: translateX(300px);
+}
+
+.room-list ul {
+    background-color: #666;
+    color: #111;
+    text-align: center;
+}
+
+.create-room {
+    padding-top: 30px;
+    display: flex;
+    flex-flow: column;
+}
+.room-button{
+    cursor: pointer;
+    padding: 5px;
+}
+.room-button:hover{
+    background-color: #999;
+}
+
+.room button{
+    background-color: green;
+    width: 100%;
+    border: 1px solid white;
+}
+
+button[click='leave']{
+    background-color: red;
+}
+
+.secret-room {
+    padding-top: 30px;
+    display: flex;
+    flex-flow: column;
+}

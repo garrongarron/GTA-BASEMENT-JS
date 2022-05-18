@@ -1,0 +1,30 @@
+### get room list of channel
+GET http://localhost/room/channel/tictactoe
+
+
+### create room list of channel
+POST http://localhost/room/ HTTP/1.1
+content-type: application/json
+
+{
+    "roomName": "todo1",
+    "userName": "pepe",
+    "channel":  "tictactoe"
+}
+
+
+### get users from list `todo1` from channel `tictactoe`
+GET http://localhost/room/list/tictactoe/todo1
+
+
+
+
+### join to room `todo1` from channel ``
+POST http://localhost/room/join HTTP/1.1
+content-type: application/json
+
+{
+    "roomName": "todo1",
+    "userName": "Juan",
+    "channel":  "Juan"
+}
