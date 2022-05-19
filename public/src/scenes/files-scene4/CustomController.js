@@ -1,3 +1,4 @@
+import sounds from "../../../sounds/Audios.js"
 import camera from "../../basic/Camera.js"
 import light from "../../basic/Light.js"
 import ray from "../../basic/shapes/Ray.js"
@@ -7,6 +8,8 @@ import { AnimationController } from "../../controllers/AnimationController.js"
 // import { BroadcasterController } from "../../controllers/BroadcasterController.js"
 import { CameraController } from "../../controllers/CameraController.js"
 import { CharacterController } from "../../controllers/CharacterController.js"
+import { CollectableController } from "../../controllers/CollectableController.js"
+import { CollisionController } from "../../controllers/CollisionController.js"
 import { CRotationController } from "../../controllers/CRotationController.js"
 import { DeathController } from "../../controllers/DeathController.js"
 import { FallingController } from "../../controllers/FallingController.js"
@@ -26,6 +29,7 @@ import { ShadowController } from "../../controllers/ShadowController.js"
 import { TerrainController } from "../../controllers/TerrrainController.js"
 import { WeaponController } from "../../controllers/WeaponController.js"
 import nick from "../../services/nick.js"
+import collectableSystem from "./CollectableSystem.js"
 import hitSystem from "./HitSystem.js"
 import spawner from "./Spawner.js"
 
@@ -61,8 +65,10 @@ class CustomController {
         this.hittedController = new HittedController(this.peerId)
         this.hPController = new HPController(this.peerId)
         this.fallingController = new FallingController(this.peerId)
+        this.collisionController = new CollisionController(this.peerId)
+        this.collectableController = new CollectableController(this.peerId)
         this.group = new THREE.Group();
-        this.shadowVector = new THREE.Vector3(0, 5, -15)
+        this.shadowVector = new THREE.Vector3(0, 5, -5)
         this.chest = null
         this.rightHand = null
     }
@@ -122,9 +128,9 @@ class CustomController {
 
         //HIT SYSTEM
         const headHitable = sphere.clone()
-        headHitable.scale.set(.125,.125,.125)
+        headHitable.scale.set(.125, .125, .125)
         headHitable.name = 'headHitable-' + this.peerId
-        headHitable.layers.enable( 1 );
+        headHitable.layers.enable(1);
         hitSystem.addHitable(headHitable)
         this.hittableController.setHitableObject(headHitable)
         const headBone = character.children[0].children[1].children[1].children[1].children[2].children[1]
@@ -136,8 +142,16 @@ class CustomController {
         this.characterController.addController(this.hittedController)
         this.characterController.addController(this.hPController)
         this.characterController.addController(this.fallingController)
+        this.characterController.addController(this.collisionController)
+        if (this.peerId == nick) {
+            this.collectableController.setArray(collectableSystem.start().children)
+            this.collectableController.setCallback((obj) => {
+                collectableSystem.start().remove(obj)
+                sounds.play('getGun')
+            })
+            this.characterController.addController(this.collectableController)
+        }
         this.characterController.start()
-
     }
 
     stop() {
