@@ -1,3 +1,4 @@
+import eventBus from "../basic/EventBus.js"
 import keyCode from "../basic/KeyCode.js"
 import keyListener, { KeyListener } from "../basic/KeyListener.js"
 import spawner from "../scenes/files-scene4/Spawner.js"
@@ -13,6 +14,9 @@ class KeyController {
         this.keyListener = peerId == nick ? keyListener : new KeyListener()
         if (this.peerId == nick) {
             this.keyListener.setCaster((params) => {
+                eventBus.dispatch('keyListener', params)
+            })
+            eventBus.subscribe('keyListener', (params) => {
                 const [keyCode, flag, keys] = params
                 broadcaster.send({ keyListenerEvent: { keyCode, flag, keys } })
             })
@@ -37,12 +41,12 @@ class KeyController {
 
         //falling
         if (this.keyListener.isPressed(keyCode.KEY_P)) this.state.mode = mode.FALLING
-        
-        
+
+
 
         // if (this.state.mode == mode.DEATH) return
         // if (this.state.mode == mode.HITTED) return
-        
+
         this.state.translation.x = 0
         this.state.translation.y = 0
 
@@ -57,8 +61,8 @@ class KeyController {
         if (this.keyListener.isPressed(keyCode.RIGHT_ARROW)) this.state.angle.y = -1
         // if (keyListener.isPressed(keyCode.LEFT_ARROW)) this.state.angle.y = 1
         // if (keyListener.isPressed(keyCode.RIGHT_ARROW)) this.state.angle.y = -1
-        
-        
+
+
     }
 }
 

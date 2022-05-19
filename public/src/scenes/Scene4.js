@@ -18,6 +18,7 @@ import sky from "../basic/shapes/Sky.js";
 import { xbotContainer } from "../models/xbot/XbotTest.js";
 import nick from "../services/nick.js";
 import terrain from "../basic/terrain/Terrain.js";
+import inventoryHandler from "../UI/inventory/InventoryHandler.js";
 
 
 
@@ -40,7 +41,7 @@ class Scene4 {
         scene.background = skyTexture;
         loopMachine.addCallback(this.render);
         loopMachine.start()
-        
+        inventoryHandler.start()
         const players = JSON.parse(localStorage.getItem('players') || '[]')
         players.forEach(peerId => {
             let player = spawner.createPlayer(peerId)

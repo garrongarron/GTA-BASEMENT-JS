@@ -1,0 +1,102 @@
+<ul class="inv-container">
+    <li class="inv-slot slot-1" title="Guns">
+        <div>5</div>
+        <span>1</span>
+    </li>
+    <li class="inv-slot slot-2" title="Bullets">
+        <div>5</div>
+        <span>2</span>
+    </li>
+    <li class="inv-slot slot-3" title="Health Protection">
+        <div>5</div>
+        <span>3</span>
+    </li>
+    <li class="inv-slot slot-4" title="First Aid">
+        <div>5</div>
+        <span>4</span>
+    </li>
+    <style>
+        .inv-container * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --main-bg-color: #009999;
+            --main-bg-color-darck: #004545;
+            --color-darck: #112222;
+            --color-light: #99ffff;
+            --highlights: #fff;
+        }
+
+        body {
+            background-color: var(--main-bg-color-darck);
+        }
+
+        .inv-container {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+
+            position: fixed;
+            right: .5vw;
+            bottom: 5.5vw;
+        }
+
+        .inv-slot {
+            width: 5vw;
+            height: 5vw;
+            margin: .5vw;
+            color: var(--main-bg-color);
+            box-shadow: 0px 0px 5px var(--color-light);
+            border-radius: .5vw;
+            font-family: sans-serif;
+            position: relative;
+            /**/
+            background-size: 70% 70%;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .inv-slot div{
+            position: absolute;
+            bottom: .2vw;
+            left: .5vw;
+            font-size: 1.2vw;
+            text-shadow: 0px 0px 1px var(--main-bg-color-darck);
+            cursor: pointer;
+            color: var(--highlights);
+            background-color: #112222;
+            width: 1.5vw;
+            height: 1.5vw;
+            line-height: 1.5vw;
+            border-radius: 100%;
+            text-align: center;
+
+        }
+        .inv-slot span{
+            position: absolute;
+            bottom: .2vw;
+            right: .5vw;
+            font-size: 1.2vw;
+            text-shadow: 0px 0px 1px var(--main-bg-color-darck);
+            cursor: pointer;
+        }
+        .inv-slot:hover{
+            cursor: pointer;
+            background-color: var(--main-bg-color);
+            color: var(--highlights);
+        }
+        .inv-slot:nth-child(1){
+            background-image: url('src/UI/inventory/img/1.png') ;
+        }
+        .inv-slot:nth-child(2){
+            background-image: url('src/UI/inventory/img/2.png') ;
+        }
+        .inv-slot:nth-child(3){
+            background-image: url('src/UI/inventory/img/3.png') ;
+        }
+        .inv-slot:nth-child(4){
+            background-image: url('src/UI/inventory/img/4.png') ;
+            
+        }
+    </style>
